@@ -4,11 +4,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.app.tasks.BookListContent;
@@ -25,10 +29,6 @@ public class MainActivity extends AppCompatActivity implements BookFragment.OnLi
     public SharedPreferences preferences;
     String PREFERENCES_NAME = "myPreferences";
 
-    public static final int REQUEST_IMAGE_CAPTURE = 1; // request code for image capture
-    private String mCurrentPhotoPath; // String used to save the path of the picture
-    private BookListContent.Book displayedBook;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity implements BookFragment.OnLi
         loadData();
         addFabsListeners();
 
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) onListFragmentClickInteraction(null, 0);
     }
 
     private void addFabsListeners() {
@@ -126,9 +128,21 @@ public class MainActivity extends AppCompatActivity implements BookFragment.OnLi
             TextView titleDetails = findViewById(R.id.book_details_title);
             TextView authorDetails = findViewById(R.id.book_details_author);
             TextView dateDetails = findViewById(R.id.book_details_date);
-            TextView picDetails = findViewById(R.id.book_details_image);
+            ImageView picDetails = findViewById(R.id.book_details_image);
 
-            titleDetails.setText("LEL");
+            String titleFromPreferences = preferences.getString("title" + position, "");
+            String authorFromPreferences = preferences.getString("author" + position, "");
+            String dateFromPreferences = preferences.getString("date" + position, "");
+            String picFromPreferences = preferences.getString("picPath" + position, "");
+
+            titleDetails.setText(titleFromPreferences);
+            authorDetails.setText(authorFromPreferences);
+            dateDetails.setText(dateFromPreferences);
+            Bitmap image = BitmapFactory.decodeFile(picFromPreferences);
+
+            if(image != null) picDetails.setImageBitmap(image);
+            else picDetails.setImageResource(getResources().getIdentifier(picFromPreferences, "drawable", getPackageName()));
+
         } else {
             startBookDetailsActivity(book, position);
         }

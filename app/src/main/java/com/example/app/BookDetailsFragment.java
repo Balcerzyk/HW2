@@ -56,9 +56,8 @@ public class BookDetailsFragment extends Fragment{
 
         Bitmap image = BitmapFactory.decodeFile(picPath);
 
-        bookImage.setImageBitmap(image);
-
-        //bookImage.setImageResource(getResources().getIdentifier(picPath, "drawable", getActivity().getPackageName()));
+        if(image != null) bookImage.setImageBitmap(image);
+        else bookImage.setImageResource(getResources().getIdentifier(picPath, "drawable", getActivity().getPackageName()));
     }
 
     public void onActivityCreated(Bundle savedInstanceState) {
