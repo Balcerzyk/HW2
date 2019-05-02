@@ -2,6 +2,8 @@ package com.example.app;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -55,10 +57,13 @@ public class MyBookRecyclerViewAdapter extends RecyclerView.Adapter<MyBookRecycl
         holder.mItem = book;
         holder.mContentView.setText(book.title);
 
-        final String picName = book.picName;
+        final String picPath = book.picPath;
         Context context = holder.mView.getContext();
-        if(picName != null && !picName.isEmpty()){
-            holder.mItemImageView.setImageResource(context.getResources().getIdentifier(picName, "drawable", context.getPackageName()));
+        if(picPath != null && !picPath.isEmpty()){
+            Bitmap image = null;
+            image = BitmapFactory.decodeFile(picPath);
+            if(image != null) holder.mItemImageView.setImageBitmap(image);
+            else holder.mItemImageView.setImageResource(context.getResources().getIdentifier(picPath, "drawable", context.getPackageName()));
         }
         holder.mView.setOnClickListener(new View.OnClickListener() {
 

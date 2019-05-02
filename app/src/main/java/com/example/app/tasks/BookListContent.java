@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 public class BookListContent {
 
@@ -19,13 +18,14 @@ public class BookListContent {
         ITEM_MAP.put(item.id, item);
     }
 
-    public static Book createBook(int position, String title, String author, String date, String picName) {
+    public static Book createBook(int position, String title, String author, String date, String picPath) {
 
-        return new Book(String.valueOf(position), title ,author, date, picName);
+        return new Book(String.valueOf(position), title ,author, date, picPath);
     }
 
     public static void deleteItems(){
         ITEMS.clear();
+        ITEM_MAP.clear();
     }
 
     public static class Book implements Parcelable {
@@ -33,22 +33,14 @@ public class BookListContent {
         public final String title;
         public final String author;
         public final String date;
-        public final String picName;
+        public String picPath;
 
-        public Book(String id, String title, String author, String date) {
+        public Book(String id, String title, String author, String date, String picPath) {
             this.id = id;
             this.title = title;
             this.author = author;
             this.date = date;
-            this.picName = "";
-        }
-
-        public Book(String id, String title, String author, String date, String picName) {
-            this.id = id;
-            this.title = title;
-            this.author = author;
-            this.date = date;
-            this.picName = picName;
+            this.picPath = picPath;
         }
 
         protected Book(Parcel in) {
@@ -56,7 +48,11 @@ public class BookListContent {
             title = in.readString();
             author = in.readString();
             date = in.readString();
-            picName = in.readString();
+            picPath = in.readString();
+        }
+
+        public void setPicPath(String path){
+            this.picPath = path;
         }
 
         public static final Creator<Book> CREATOR = new Creator<Book>() {
@@ -87,7 +83,7 @@ public class BookListContent {
             dest.writeString(title);
             dest.writeString(author);
             dest.writeString(date);
-            dest.writeString(picName);
+            dest.writeString(picPath);
         }
     }
 }

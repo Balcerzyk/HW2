@@ -16,5 +16,8 @@
     <string name="publication_date">Data Publikacji</string>
     <string name="author">Autor</string>
     <string name="add">Dodaj</string>
+    <string name="yes">Tak</string>
+    <string name="no">Anuluj</string>
 
+    <string name="myFileprovider">com.example.app.fileprovider</string>
 </resources>
