@@ -24,11 +24,6 @@ import static android.graphics.Color.GREEN;
 import static com.example.app.tasks.BookListContent.addItem;
 import static com.example.app.tasks.BookListContent.createBook;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link BookListContent.Book} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
- */
 public class MyBookRecyclerViewAdapter extends RecyclerView.Adapter<MyBookRecyclerViewAdapter.ViewHolder> {
 
     private final List<BookListContent.Book> mValues;

@@ -34,14 +34,11 @@ public class MainActivity extends AppCompatActivity implements BookFragment.OnLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         preferences = getSharedPreferences(PREFERENCES_NAME, MainActivity.MODE_PRIVATE);
-        //SharedPreferences.Editor editor = preferences.edit();
-        //editor.clear();
-        //editor.commit();
         loadData();
         addFabsListeners();
 
         int orientation = getResources().getConfiguration().orientation;
-        if (orientation == Configuration.ORIENTATION_LANDSCAPE) onListFragmentClickInteraction(null, 0);
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) onListFragmentClickInteraction(null, 0); //no crash if no elements
     }
 
     private void addFabsListeners() {
@@ -87,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements BookFragment.OnLi
                 ((BookFragment) getSupportFragmentManager().findFragmentById(R.id.bookFragment)).notifyDataChange();
 
             } else if (resultCode == AddActivity.RESULT_CANCELED) {
-
+                Log.v("1", "Canceled");
             }
 
         }

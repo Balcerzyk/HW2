@@ -86,8 +86,12 @@ public class AddActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == AddActivity.RESULT_OK) {
-            //Bundle extras = data.getExtras();
-            //imageBitmap = (Bitmap) extras.get("data");
+            Log.v("2", "camera ok");
+        }
+        else if(resultCode == AddActivity.RESULT_CANCELED) {
+            Intent returnIntent = new Intent();
+            setResult(AddActivity.RESULT_CANCELED,returnIntent);
+            finish();
         }
     }
 
