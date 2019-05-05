@@ -28,7 +28,7 @@ public class BookFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_task_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_book_list, container, false);
 
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
@@ -60,7 +60,7 @@ public class BookFragment extends Fragment {
 
 
     public interface OnListFragmentInteractionListener {
-        void onListFragmentClickInteraction(BookListContent.Book task, int position);
+        void onListFragmentClickInteraction(BookListContent.Book book, int position);
         void OnDeleteButtonClickListener(int position);
     }
 

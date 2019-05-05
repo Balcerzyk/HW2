@@ -4,25 +4,18 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.app.BookFragment.OnListFragmentInteractionListener;
 import com.example.app.tasks.BookListContent;
 
 import java.util.List;
-
-import static android.graphics.Color.GREEN;
-import static com.example.app.tasks.BookListContent.addItem;
-import static com.example.app.tasks.BookListContent.createBook;
 
 public class MyBookRecyclerViewAdapter extends RecyclerView.Adapter<MyBookRecyclerViewAdapter.ViewHolder> {
 
@@ -39,7 +32,7 @@ public class MyBookRecyclerViewAdapter extends RecyclerView.Adapter<MyBookRecycl
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_task, parent, false);
+                .inflate(R.layout.fragment_book, parent, false);
         ViewHolder holder = new ViewHolder(view);
         preferences = parent.getContext().getSharedPreferences(PREFERENCES_NAME, MainActivity.MODE_PRIVATE);
         setButtonClickListener(view, holder);
